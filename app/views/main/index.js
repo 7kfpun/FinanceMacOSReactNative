@@ -10,11 +10,16 @@ import {
 } from 'react-native-macos';
 
 // 3rd party libraries
+import ViewPager from 'react-native-viewpager';
 import { inject, observer } from 'mobx-react/native';
 import { Link } from 'react-router-native';
 
 import TouchBar from '../touch-bar';  // eslint-disable-line import/no-named-as-default,import/no-named-as-default-member
 import StockCell from './elements/stock-cell';  // eslint-disable-line import/no-named-as-default,import/no-named-as-default-member
+
+import DetailsPage from './elements/details-page';
+import ChartPage from './elements/chart-page';
+import NewsPage from './elements/news-page';
 
 const styles = StyleSheet.create({
   container: {
@@ -27,7 +32,7 @@ const styles = StyleSheet.create({
   },
   stocksBlock: {
     flexDirection: 'column',
-    flex: 11,
+    flex: 9,
   },
   detailedBlock: {
     flex: 5,
@@ -55,11 +60,16 @@ export default class MainView extends Component {
   constructor(props) {
     super(props);
 
+    const viewpageDataSource = new ViewPager.DataSource({
+      pageHasChanged: (p1, p2) => p1 !== p2,
+    });
+
     this.state = {
       refreshing: false,
       dataSource: new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 }),
       selectedStock: { symbol: 'FB' },
       watchlist: [],
+      viewpageDataSource: viewpageDataSource.cloneWithPages(['DETAILS', 'CHART', 'NEWS']),
     };
   }
 
@@ -73,6 +83,24 @@ export default class MainView extends Component {
     this.setState({
       key: Math.random(),
     });
+  }
+
+  renderViewPager(data, pageID) {
+    if (data == 'DETAILS') {
+      return (
+        <DetailsPage />
+      );
+    } else if (data == 'CHART') {
+      return (
+        <ChartPage />
+      );
+    } else if (data == 'NEWS') {
+      return (
+        <NewsPage />
+      );
+    }
+
+    return null;
   }
 
   render() {
@@ -96,6 +124,15 @@ export default class MainView extends Component {
             renderRow={stock => <StockCell stock={stock} />}
             enableEmptySections
           />
+        </View>
+
+        <View style={styles.detailedBlock}>
+          <ViewPager
+            // style={this.props.style}
+            dataSource={this.state.viewpageDataSource}
+            renderPage={this.renderViewPager}
+            isLoop={false}
+            autoPlay={false} />
         </View>
 
         <View style={styles.footerBlock}>

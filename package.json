@@ -14,6 +14,7 @@
     "react-native-macos": "^0.10.5",
     "react-native-simple-store": "^1.1.0",
     "react-native-touchbar": "^1.0.0",
+    "react-native-viewpager": "^0.2.13",
     "react-router-native": "^2.0.0-beta.0",
     "rn-viewpager": "^1.1.3"
   },
