@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  Button,
   Linking,
   ListView,
   RefreshControl,
@@ -10,7 +11,6 @@ import {
 } from 'react-native-macos';
 
 // 3rd party libraries
-import ViewPager from 'react-native-viewpager';
 import { inject, observer } from 'mobx-react/native';
 import { Link } from 'react-router-native';
 
@@ -34,10 +34,13 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     flex: 9,
   },
-  detailedBlock: {
+  detailsBlock: {
     flex: 5,
     backgroundColor: '#202020',
     justifyContent: 'space-between',
+  },
+  detailsChoice: {
+    flexDirection: 'row',
   },
   footerBlock: {
     flex: 1,
@@ -60,41 +63,31 @@ export default class MainView extends Component {
   constructor(props) {
     super(props);
 
-    const viewpageDataSource = new ViewPager.DataSource({
-      pageHasChanged: (p1, p2) => p1 !== p2,
-    });
-
     this.state = {
       refreshing: false,
       dataSource: new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 }),
-      selectedStock: { symbol: 'FB' },
-      watchlist: [],
-      viewpageDataSource: viewpageDataSource.cloneWithPages(['DETAILS', 'CHART', 'NEWS']),
+      detailsType: 'DETAILS',
     };
   }
 
   componentDidMount() {
-    this.props.listStore.getWatchlistResult();
     this.prepareRows();
   }
 
   prepareRows() {
     this.props.listStore.getWatchlistResult();
-    this.setState({
-      key: Math.random(),
-    });
   }
 
-  renderViewPager(data, pageID) {
-    if (data == 'DETAILS') {
+  renderViewPager(type) {
+    if (type == 'DETAILS') {
       return (
         <DetailsPage />
       );
-    } else if (data == 'CHART') {
+    } else if (type == 'CHART') {
       return (
         <ChartPage />
       );
-    } else if (data == 'NEWS') {
+    } else if (type == 'NEWS') {
       return (
         <NewsPage />
       );
@@ -113,7 +106,6 @@ export default class MainView extends Component {
         <View style={styles.statusBar} />
         <View style={styles.stocksBlock}>
           <ListView
-            key={this.state.key}
             refreshControl={
               <RefreshControl
                 refreshing={this.state.refreshing}
@@ -126,13 +118,8 @@ export default class MainView extends Component {
           />
         </View>
 
-        <View style={styles.detailedBlock}>
-          <ViewPager
-            // style={this.props.style}
-            dataSource={this.state.viewpageDataSource}
-            renderPage={this.renderViewPager}
-            isLoop={false}
-            autoPlay={false} />
+        <View style={styles.detailsBlock}>
+          {this.renderViewPager(this.state.detailsType)}
         </View>
 
         <View style={styles.footerBlock}>
@@ -145,21 +132,25 @@ export default class MainView extends Component {
               ↺
             </Text>
           </TouchableHighlight>
-          <TouchableHighlight
-            style={styles.yahoo}
-            onPress={() => Linking.openURL(
-              `http://finance.yahoo.com/q?s=${selectedStock.symbol}`
-            )
-            .catch(err => console.error('An error occurred', err))}
-            underlayColor="#202020"
-          >
-            <Text style={styles.text}>
-              Yahoo Finance
-            </Text>
-          </TouchableHighlight>
+
+          <View style={styles.detailsChoice}>
+            <Button
+              title="Info"
+              bezelStyle="texturedRounded"
+              onClick={() => this.setState({ detailsType: 'DETAILS' })} />
+            <Button
+              title="Chart"
+              bezelStyle="texturedRounded"
+              onClick={() => this.setState({ detailsType: 'CHART' })} />
+            <Button
+              title="News"
+              bezelStyle="texturedRounded"
+              onClick={() => this.setState({ detailsType: 'NEWS' })} />
+          </View>
+
           <Link to={'settings'} style={styles.settings} underlayColor="#202020">
             <Text style={styles.text}>
-              Settings
+              ☰
             </Text>
           </Link>
         </View>

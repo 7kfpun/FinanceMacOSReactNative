@@ -71,6 +71,10 @@ const styles = StyleSheet.create({
     flex: 10,
     paddingHorizontal: 15,
   },
+  text: {
+    fontSize: 15,
+    color: '#3CABDA',
+  },
 });
 
 export default class Settings extends React.Component {
