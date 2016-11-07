@@ -10,13 +10,17 @@ iOS's Stocks App clone written for MacOS with Touch Bar supported. Data is pulle
 
 ## App preview
 
-#### Touch Bar
+#### Screenshot
 
-![Preview](assets/touchbar-preview.png "Touch Bar preview")
+![Preview](assets/screenshot.png "Screenshot")
 
 #### Application
 
 ![Preview](assets/app-preview.png "App preview")
+
+#### Touch Bar
+
+![Preview](assets/touchbar-preview.png "Touch Bar preview")
 
 ## React and React Native version
 
@@ -36,6 +40,10 @@ iOS's Stocks App clone written for MacOS with Touch Bar supported. Data is pulle
 * [FinanceReactNative](https://github.com/7kfpun/FinanceReactNative) - iOS's Stocks App clone written in React Native for demo purpose (available both iOS and Android).
 
 ## Running
+
+#### Prerequisites
+
+* Xcode 8.1 on macOS Sierra 10.12.1 (12B2657) or later
 
 #### Clone & install
 
