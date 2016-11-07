@@ -1,12 +1,32 @@
 {
   "name": "Finance",
   "version": "0.0.1",
-  "description": "iOS's Stocks App clone written for MacOS with TouchBar supported. Data is pulled from Yahoo Finance.",
+  "description": "iOS's Stocks App clone written for MacOS with Touch Bar supported. Data is pulled from Yahoo Finance.",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native-macos/local-cli/cli.js start",
     "postinstall": "find ./node_modules/react-native-macos \\( -name *.h -o -name *.m \\) -print0 | xargs -0 sed -i '' -e 's:<CSSLayout/\\(.*\\)>:\"\\1\":g'"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/7kfpun/FinanceMacOSReactNative.git"
+  },
+  "keywords": [
+    "react-native-macos",
+    "react-native",
+    "react",
+    "macos",
+    "touchbar",
+    "finance",
+    "stocks",
+    "yahoo-finance"
+  ],
+  "author": "kf <7kfpun@gmail.com> (https://github.com/7kfpun)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/7kfpun/FinanceMacOSReactNative/issues"
+  },
+  "homepage": "https://github.com/7kfpun/FinanceMacOSReactNative#readme",
   "dependencies": {
     "mobx": "^2.6.1",
     "mobx-react": "^3.5.8",
