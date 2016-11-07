@@ -1,4 +1,9 @@
-import { action, observable } from 'mobx';
+import { ListView } from 'react-native-macos';
+
+// 3rd party libraries
+import { action, computed, observable } from 'mobx';
+
+import rss from '../utils/rss';
 
 const ROTATE_PROPERTIES = {
   Change: 'MarketCapitalization',
@@ -9,6 +14,8 @@ const ROTATE_PROPERTIES = {
 class SelectedStore {
   @observable selectedStock = {};
   @observable selectedProperty = 'ChangeinPercent';
+
+  @observable newslist = [];
 
   @action setSelectedProperty = (selectedProperty) => {
     console.log('setSelectedProperty', selectedProperty);
@@ -22,6 +29,21 @@ class SelectedStore {
 
   @action setSelectedStock = (selectedStock) => {
     this.selectedStock = selectedStock;
+    this.getNewsList();
+  }
+
+  @action getNewsList() {
+    const that = this;
+    rss(`https://feeds.finance.yahoo.com/rss/2.0/headline?s=${this.selectedStock.symbol}&region=US&lang=en-US`)
+      .then((json) => {
+        that.newslist = json.responseData.feed.entries;
+      });
+  }
+
+  ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+
+  @computed get newsDataSource() {
+    return this.ds.cloneWithRows(this.newslist.slice());
   }
 }
 

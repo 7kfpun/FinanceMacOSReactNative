@@ -33,25 +33,22 @@ export default class NewsPage extends React.Component {
   }
 
   componentDidMount() {
-    const { selectedStock } = this.props.selectedStore;
+    this.props.selectedStore.getNewsList();
+  }
 
-    const that = this;
-    rss(`https://feeds.finance.yahoo.com/rss/2.0/headline?s=${selectedStock.symbol}&region=US&lang=en-US`).then((json) => {
-      console.log(json);
-      that.setState({
-        dataSource: that.state.dataSource.cloneWithRows(json.responseData.feed.entries),
-        key: Math.random(),
-      });
-    });
+  getNews() {
   }
 
   render() {
+    const { newsDataSource } = this.props.selectedStore;
+
     return (
       <View style={styles.container}>
         <ListView
           key={this.state.key}
-          dataSource={this.state.dataSource}
+          dataSource={newsDataSource}
           renderRow={news => <NewsCell news={news} />}
+          enableEmptySections
         />
       </View>
     );

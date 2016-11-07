@@ -133,18 +133,18 @@ export default class MainView extends Component {
             </Text>
           </TouchableHighlight>
 
-          <View style={styles.detailsChoice}>
+          <View key={this.state.detailsType} style={styles.detailsChoice}>
             <Button
               title="Info"
-              bezelStyle="texturedRounded"
+              bezelStyle={this.state.detailsType === 'DETAILS' ? 'recessed' : 'texturedRounded'}
               onClick={() => this.setState({ detailsType: 'DETAILS' })} />
             <Button
               title="Chart"
-              bezelStyle="texturedRounded"
+              bezelStyle={this.state.detailsType === 'CHART' ? 'recessed' : 'texturedRounded'}
               onClick={() => this.setState({ detailsType: 'CHART' })} />
             <Button
               title="News"
-              bezelStyle="texturedRounded"
+              bezelStyle={this.state.detailsType === 'NEWS' ? 'recessed' : 'texturedRounded'}
               onClick={() => this.setState({ detailsType: 'NEWS' })} />
           </View>
 

@@ -96,19 +96,7 @@ export default class SettingsView extends Component {
 
     this.state = {
       dataSource: new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 }),
-      watchlist: props.listStore.watchlist.map(item => Object.assign({}, { symbol: item.symbol })),
     };
-  }
-
-  componentDidMount() {
-    this.prepareRows();
-  }
-
-  prepareRows() {
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(this.state.watchlist),
-      key: Math.random(),
-    });
   }
 
   renderToolbar() {
@@ -136,7 +124,7 @@ export default class SettingsView extends Component {
   }
 
   render() {
-    const { watchlistResult } = this.props.listStore;
+    const { dataSource, watchlistResult } = this.props.listStore;
     const { selectedProperty, setSelectedProperty } = this.props.selectedStore;
 
     return (
@@ -145,7 +133,7 @@ export default class SettingsView extends Component {
         <View style={styles.topBlock}>
           <ListView
             key={this.state.key}
-            dataSource={this.state.dataSource}
+            dataSource={dataSource}
             renderRow={stock => <StockCell stock={stock} watchlistResult={watchlistResult} />}
             enableEmptySections
           />

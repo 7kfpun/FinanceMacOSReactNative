@@ -1,23 +1,30 @@
-import { action, computed, observable } from 'mobx';
+import { ListView } from 'react-native-macos';
 
-import { ListView } from 'react-native';
+// 3rd party libraries
+import { action, computed, observable } from 'mobx';
+import store from 'react-native-simple-store';
 
 import finance from '../utils/finance';
 
 import selectedStore from './selectedStore';
 
 class WatchlistStore {
-  @observable watchlist;
+  @observable watchlist = [];
   @observable watchlistResult;
 
   constructor() {
-    this.watchlist = [
+    const defaultWatchlist = [
       { symbol: 'AAPL', share: 100 },
       { symbol: 'FB', share: 100 },
       { symbol: 'GOOG', share: 100 },
     ];
+
+    store.get('watchlist')
+      .then((watchlist) => {
+        this.watchlist = watchlist && watchlist.length > 0 ? watchlist : defaultWatchlist;
+        selectedStore.setSelectedStock(this.watchlist[0]);
+      });
     this.getWatchlistResult();
-    selectedStore.setSelectedStock(this.watchlist[0]);
   }
 
   ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
@@ -35,12 +42,13 @@ class WatchlistStore {
       symbol: item,
     });
     this.getWatchlistResult();
+    store.save('watchlist', this.watchlist);
   }
 
-  removeListItem (item) {
-    this.list = this.list.filter((l) => {
-      return l.index !== item.index
-    })
+  @action removeWatchlistItem (item) {
+    console.log('removeWatchlistItem');
+    this.watchlist = this.watchlist.filter(element => element.symbol !== item);
+    store.save('watchlist', this.watchlist);
   }
 
   @action getWatchlistResult() {

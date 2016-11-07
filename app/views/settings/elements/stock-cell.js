@@ -2,6 +2,7 @@ import React from 'react';
 import {
   StyleSheet,
   Text,
+  TouchableHighlight,
   View,
 } from 'react-native-macos';
 
@@ -27,9 +28,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: '#FC3D39',
     textAlign: 'left',
-    marginTop: 20,
-    marginBottom: 10,
-    marginRight: 10,
   },
   stock: {
     flex: 8,
@@ -80,18 +78,27 @@ const styles = StyleSheet.create({
   },
 });
 
-@inject('listStore', 'selectedStore') @observer
+@inject('listStore') @observer
 export default class StockCell extends React.Component {
   onPressDelete(symbol) {
     console.log('onPressDelete', symbol);
+    this.props.listStore.removeWatchlistItem(symbol);
   }
 
   render() {
-    const { watchlistResult } = this.props.listStore;
+    const { removeWatchlistItem, watchlistResult } = this.props.listStore;
 
     return (
       <View style={styles.container}>
-
+        <TouchableHighlight
+          style={styles.deleteIcon}
+          onPress={() => this.onPressDelete(this.props.stock.symbol)}
+          underlayColor="black"
+        >
+          <Text style={styles.deleteText}>
+            ⓧ
+          </Text>
+        </TouchableHighlight>
         <View style={styles.stock}>
           <View style={styles.symbol}>
             <Text style={styles.symbolText}>
