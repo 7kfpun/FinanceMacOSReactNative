@@ -1,44 +1,11 @@
 import React, { Component } from 'react';
 import {
   Button,
-  StyleSheet,
-  View,
 } from 'react-native-macos';
 
 // 3rd party libraries
 import { inject, observer } from 'mobx-react/native';
 import TouchBar from 'react-native-touchbar';
-
-const styles = StyleSheet.create({
-  price: {
-    flex: 2,
-  },
-  priceText: {
-    fontSize: 16,
-    color: 'white',
-    textAlign: 'right',
-    marginTop: 10,
-    marginBottom: 10,
-    marginRight: 10,
-  },
-  changeRed: {
-    backgroundColor: '#FC3D39',
-    flex: 2,
-    padding: 5,
-    borderRadius: 3,
-  },
-  changeGreen: {
-    backgroundColor: '#53D769',
-    flex: 2,
-    padding: 5,
-    borderRadius: 3,
-  },
-  changeText: {
-    fontSize: 16,
-    color: 'white',
-    textAlign: 'center',
-  },
-});
 
 @inject('listStore', 'selectedStore') @observer
 export default class MyTouchBar extends Component {
@@ -57,21 +24,32 @@ export default class MyTouchBar extends Component {
     return (
       <TouchBar>
         {watchlist.map((object, i) => {
-          return <Button
+          return (<Button
             key={i}
-            title={this.state.withDetails && watchlistResult && watchlistResult[object.symbol] ? `${object.symbol} ${watchlistResult[object.symbol][selectedProperty]}`: object.symbol}
+            title={this.state.withDetails && watchlistResult && watchlistResult[object.symbol] ? `${object.symbol} ${watchlistResult[object.symbol][selectedProperty]}` : object.symbol}
             bezelStyle="rounded"
-            onClick={() => setSelectedStock(object)} />
-          })}
+            onClick={() => setSelectedStock(object)}
+          />);
+        })}
         <Button
-          title={this.state.withDetails ? "🌕" : "🌒"}
+          title={this.state.withDetails ? '🌕' : '🌒'}
           bezelStyle="rounded"
-          onClick={() => this.setState({ withDetails: !this.state.withDetails })} />
+          onClick={() => this.setState({ withDetails: !this.state.withDetails })}
+        />
       </TouchBar>
     );
   }
 }
 
-MyTouchBar.propTypes = {};
+MyTouchBar.propTypes = {
+  listStore: React.PropTypes.shape({
+    watchlist: React.PropTypes.array,
+    watchlistResult: React.PropTypes.object,
+  }).isRequired,
+  selectedStore: React.PropTypes.shape({
+    selectedProperty: React.PropTypes.object,
+    setSelectedStock: React.PropTypes.object,
+  }).isRequired,
+};
 
 MyTouchBar.defaultProps = {};

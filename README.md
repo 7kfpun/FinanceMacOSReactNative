@@ -1,8 +1,8 @@
 # FinanceMacOSReactNative
 
-[![Dependency Status](https://david-dm.org/7kfpun/FinanceMacOSReactNative.svg)](https://david-dm.org/7kfpun/FinanceMacOSReactNative) [![devDependency Status](https://david-dm.org/7kfpun/FinanceMacOSReactNative/dev-status.svg)](https://david-dm.org/7kfpun/FinanceMacOSReactNative#info=devDependencies)
+[![Dependency Status](https://david-dm.org/7kfpun/FinanceMacOSReactNative.svg)](https://david-dm.org/7kfpun/FinanceMacOSReactNative) [![devDependency Status](https://david-dm.org/7kfpun/FinanceMacOSReactNative/dev-status.svg)](https://david-dm.org/7kfpun/FinanceMacOSReactNative?type=dev)
 
-iOS's Stocks App clone written for MacOS with Touch Bar supported. Data is pulled from [Yahoo Finance](finance.yahoo.com).
+iOS's Stocks App clone written for MacOS with Touch Bar support. Data is pulled from [Yahoo Finance](finance.yahoo.com).
 
 ## Download
 

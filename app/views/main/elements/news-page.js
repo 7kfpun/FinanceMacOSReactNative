@@ -11,8 +11,6 @@ import { inject, observer } from 'mobx-react/native';
 // Elements
 import NewsCell from './news-cell';
 
-import rss from '../../../utils/rss';
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -36,9 +34,6 @@ export default class NewsPage extends React.Component {
     this.props.selectedStore.getNewsList();
   }
 
-  getNews() {
-  }
-
   render() {
     const { newsDataSource } = this.props.selectedStore;
 
@@ -56,11 +51,10 @@ export default class NewsPage extends React.Component {
 }
 
 NewsPage.propTypes = {
-  stock: React.PropTypes.shape({
-    symbol: React.PropTypes.string,
-  }),
+  selectedStore: React.PropTypes.shape({
+    getNewsList: React.PropTypes.func,
+    newsDataSource: React.PropTypes.array,
+  }).isRequired,
 };
 
-NewsPage.defaultProps = {
-  stock: {},
-};
+NewsPage.defaultProps = {};

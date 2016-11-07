@@ -175,7 +175,7 @@ export default class SettingsView extends Component {
 SettingsView.propTypes = {
   title: React.PropTypes.string,
   listStore: React.PropTypes.shape({
-    watchlist: React.PropTypes.array,
+    dataSource: React.PropTypes.object,
     watchlistResult: React.PropTypes.object,
   }).isRequired,
   selectedStore: React.PropTypes.shape({

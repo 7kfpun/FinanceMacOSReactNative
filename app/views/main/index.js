@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   Button,
-  Linking,
   ListView,
   RefreshControl,
   StyleSheet,
@@ -17,9 +16,9 @@ import { Link } from 'react-router-native';
 import TouchBar from '../touch-bar';  // eslint-disable-line import/no-named-as-default,import/no-named-as-default-member
 import StockCell from './elements/stock-cell';  // eslint-disable-line import/no-named-as-default,import/no-named-as-default-member
 
-import DetailsPage from './elements/details-page';
-import ChartPage from './elements/chart-page';
-import NewsPage from './elements/news-page';
+import DetailsPage from './elements/details-page';  // eslint-disable-line import/no-named-as-default,import/no-named-as-default-member
+import ChartPage from './elements/chart-page';  // eslint-disable-line import/no-named-as-default,import/no-named-as-default-member
+import NewsPage from './elements/news-page';  // eslint-disable-line import/no-named-as-default,import/no-named-as-default-member
 
 const styles = StyleSheet.create({
   container: {
@@ -79,15 +78,15 @@ export default class MainView extends Component {
   }
 
   renderViewPager(type) {
-    if (type == 'DETAILS') {
+    if (type === 'DETAILS') {
       return (
         <DetailsPage />
       );
-    } else if (type == 'CHART') {
+    } else if (type === 'CHART') {
       return (
         <ChartPage />
       );
-    } else if (type == 'NEWS') {
+    } else if (type === 'NEWS') {
       return (
         <NewsPage />
       );
@@ -98,7 +97,6 @@ export default class MainView extends Component {
 
   render() {
     const { dataSource } = this.props.listStore;
-    const { selectedStock } = this.props.selectedStore;
 
     return (
       <View style={styles.container}>
@@ -137,15 +135,18 @@ export default class MainView extends Component {
             <Button
               title="Info"
               bezelStyle={this.state.detailsType === 'DETAILS' ? 'recessed' : 'texturedRounded'}
-              onClick={() => this.setState({ detailsType: 'DETAILS' })} />
+              onClick={() => this.setState({ detailsType: 'DETAILS' })}
+            />
             <Button
               title="Chart"
               bezelStyle={this.state.detailsType === 'CHART' ? 'recessed' : 'texturedRounded'}
-              onClick={() => this.setState({ detailsType: 'CHART' })} />
+              onClick={() => this.setState({ detailsType: 'CHART' })}
+            />
             <Button
               title="News"
               bezelStyle={this.state.detailsType === 'NEWS' ? 'recessed' : 'texturedRounded'}
-              onClick={() => this.setState({ detailsType: 'NEWS' })} />
+              onClick={() => this.setState({ detailsType: 'NEWS' })}
+            />
           </View>
 
           <Link to={'settings'} style={styles.settings} underlayColor="#202020">
@@ -163,9 +164,6 @@ MainView.propTypes = {
   listStore: React.PropTypes.shape({
     getWatchlistResult: React.PropTypes.func,
     dataSource: React.PropTypes.array,
-  }).isRequired,
-  selectedStore: React.PropTypes.shape({
-    selectedStock: React.PropTypes.object,
   }).isRequired,
 };
 

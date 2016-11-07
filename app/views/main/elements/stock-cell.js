@@ -152,14 +152,21 @@ export default class StockCell extends React.Component {
 }
 
 StockCell.propTypes = {
-  watchlistResult: React.PropTypes.shape({}),
   stock: React.PropTypes.shape({
     symbol: React.PropTypes.string,
   }),
   selectedStock: React.PropTypes.shape({
     symbol: React.PropTypes.string,
   }),
-  selectedProperty: React.PropTypes.string,
+  listStore: React.PropTypes.shape({
+    watchlistResult: React.PropTypes.object,
+  }).isRequired,
+  selectedStore: React.PropTypes.shape({
+    selectedStock: React.PropTypes.object,
+    selectedProperty: React.PropTypes.string,
+    setSelectedStock: React.PropTypes.func,
+    rotateSelectedProperty: React.PropTypes.func,
+  }).isRequired,
 };
 
 StockCell.defaultProps = {

@@ -86,7 +86,7 @@ export default class StockCell extends React.Component {
   }
 
   render() {
-    const { removeWatchlistItem, watchlistResult } = this.props.listStore;
+    const { watchlistResult } = this.props.listStore;
 
     return (
       <View style={styles.container}>
@@ -121,10 +121,13 @@ export default class StockCell extends React.Component {
 }
 
 StockCell.propTypes = {
-  // watchlistResult: React.PropTypes.shape({}),
-  // stock: React.PropTypes.shape({
-  //   symbol: React.PropTypes.string,
-  // }),
+  stock: React.PropTypes.shape({
+    symbol: React.PropTypes.string,
+  }).isRequired,
+  listStore: React.PropTypes.shape({
+    removeWatchlistItem: React.PropTypes.func,
+    watchlistResult: React.PropTypes.object,
+  }).isRequired,
 };
 
 StockCell.defaultProps = {

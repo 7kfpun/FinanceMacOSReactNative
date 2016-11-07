@@ -96,6 +96,9 @@ StockCell.propTypes = {
     exchDisp: React.PropTypes.string,
     name: React.PropTypes.string,
   }),
+  listStore: React.PropTypes.shape({
+    addItem: React.PropTypes.func,
+  }).isRequired,
 };
 
 StockCell.defaultProps = {

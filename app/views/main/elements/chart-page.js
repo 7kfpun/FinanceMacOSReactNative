@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    resizeMode: 'stretch'
+    resizeMode: 'stretch',
   },
 });
 
@@ -123,11 +123,9 @@ export default class ChartPage extends React.Component {
 }
 
 ChartPage.propTypes = {
-  stock: React.PropTypes.shape({
-    symbol: React.PropTypes.string,
-  }),
+  selectedStore: React.PropTypes.shape({
+    selectedStock: React.PropTypes.object,
+  }).isRequired,
 };
 
-ChartPage.defaultProps = {
-  stock: {},
-};
+ChartPage.defaultProps = {};

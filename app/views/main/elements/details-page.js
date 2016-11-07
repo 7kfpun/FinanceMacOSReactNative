@@ -196,10 +196,12 @@ export default class DetailsPage extends React.Component {
 }
 
 DetailsPage.propTypes = {
-  watchlistResult: React.PropTypes.shape({}),
-  stock: React.PropTypes.shape({
-    symbol: React.PropTypes.string,
-  }),
+  listStore: React.PropTypes.shape({
+    watchlistResult: React.PropTypes.object,
+  }).isRequired,
+  selectedStore: React.PropTypes.shape({
+    selectedStock: React.PropTypes.object,
+  }).isRequired,
 };
 
 DetailsPage.defaultProps = {
