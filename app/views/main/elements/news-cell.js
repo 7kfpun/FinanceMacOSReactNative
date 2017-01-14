@@ -21,6 +21,12 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'left',
   },
+  descriptionText: {
+    fontSize: 12,
+    fontWeight: '100',
+    color: 'white',
+    textAlign: 'left',
+  },
   timeText: {
     fontSize: 12,
     color: '#A6A6A6',
@@ -41,8 +47,11 @@ export default class NewsCell extends React.Component {
           <Text style={styles.titleText}>
             {this.props.news.title}
           </Text>
+          <Text style={styles.descriptionText}>
+            {this.props.news.description}
+          </Text>
           <Text style={styles.timeText}>
-            {`${moment(new Date(this.props.news.publishedDate)).format('D/M/YYYY')} at ${moment(new Date(this.props.news.publishedDate)).format('LT')}`}
+            {`${moment(new Date(this.props.news.pubDate)).format('D/M/YYYY')} at ${moment(new Date(this.props.news.pubDate)).format('LT')}`}
           </Text>
         </View>
       </TouchableHighlight>
@@ -53,8 +62,9 @@ export default class NewsCell extends React.Component {
 NewsCell.propTypes = {
   news: React.PropTypes.shape({
     title: React.PropTypes.string,
+    description: React.PropTypes.string,
     link: React.PropTypes.string,
-    publishedDate: React.PropTypes.string,
+    pubDate: React.PropTypes.string,
   }),
 };
 
