@@ -36,7 +36,8 @@ class SelectedStore {
     const that = this;
     rss(`https://feeds.finance.yahoo.com/rss/2.0/headline?s=${this.selectedStock.symbol}&region=US&lang=en-US`)
       .then((json) => {
-        that.newslist = json.responseData.feed.entries;
+        console.log('getNewsList', json);
+        that.newslist = json.query.results.item;
       });
   }
 
