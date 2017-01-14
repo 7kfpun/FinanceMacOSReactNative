@@ -6,7 +6,7 @@ iOS's Stocks App clone written for MacOS with Touch Bar support. Data is pulled 
 
 ## Download
 
-[![Mac App Button](assets/mac-button.png "Mac App Button")](https://github.com/7kfpun/FinanceMacOSReactNative/releases/download/v0.0.1/Finance.app.zip)
+[![Mac App Button](assets/mac-button.png "Mac App Button")](https://github.com/7kfpun/FinanceMacOSReactNative/releases/download/v0.0.2/Finance.app.zip)
 
 ## App preview
 
